@@ -9,7 +9,8 @@
             background-image: url('board.svg');
             width: 600px;
             height: 600px;
-            position: relative;
+            position: absolute;
+            left: 500px;
             top: 100px;
         }
 
@@ -23,12 +24,6 @@
         }
 
         .disp {
-            top: 50%;
-            right: 200px;
-            position: absolute;
-        }
-
-        .disp2 {
             top: 360px;
             left: 760px;
             position: absolute;
@@ -49,21 +44,73 @@
             opacity: 0;
             transition: 0.3s
         }
+
+        #svg1 {
+            width: 15px;
+            height: 600px;
+            position: absolute;
+            top: 100px;
+            left: 480px;
+        }
+
+        #svg2 {
+            width: 600px;
+            height: 25px;
+            position: absolute;
+            top: 700px;
+            left: 500;
+        }
+
+        .rotation-button {
+            background-image: url('rotation-button.png');
+            background-color: #eee;
+            background-size: cover;
+            width: 65px;
+            height: 65px;
+        }
+
+        #rotdiv {
+            position: absolute;
+            left: 1150px;
+            top: 625px;
+        }
     </style>
 </head>
 
 <body onload="loading()">
-    <span onclick="clicked(event)">
-    <center>
+
+    <div onclick="clicked(event)">
+        <svg id="svg1">
+            <text x="0" y="45"></text>
+            <text x="0" y="120"></text>
+            <text x="0" y="195"></text>
+            <text x="0" y="270"></text>
+            <text x="0" y="345"></text>
+            <text x="0" y="420"></text>
+            <text x="0" y="495"></text>
+            <text x="0" y="570"></text>
+        </svg>
+        <svg id="svg2">
+            <text x="35" y="20"></text>
+            <text x="110" y="20"></text>
+            <text x="185" y="20"></text>
+            <text x="260" y="20"></text>
+            <text x="335" y="20"></text>
+            <text x="410" y="20"></text>
+            <text x="485" y="20"></text>
+            <text x="560" y="20"></text>
+        </svg>
         <div id="board" class="board"></div>
-    </center>
-    <div id="coloredSquares">
+        <div id="coloredSquares">
+        </div>
+        <div id="disp" class="disp">
+            <div id="dispSquare"></div>
+            <div id="score"></div>
+        </div>
     </div>
-    <div id="disp" class="disp2">
-        <div id="dispSquare"></div>
-        <div id="score"></div>
+    <div id="rotdiv">
+        <button class="rotation-button" onclick="rotateBoard()"></button> <span>&nbsp;&nbsp; Orientation: white</span>
     </div>
-    </span>
 </body>
 
 </html>

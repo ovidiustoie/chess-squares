@@ -14,6 +14,7 @@ let game = {
 
 function loading() {
     game.setSquare();
+    dispCoords();
 }
 
 function retSquare(coord) {
@@ -82,3 +83,28 @@ function colorSquare(square, color) {
     setTimeout(function () { el.style.opacity = 0 }, 400);
     setTimeout(function () { parent.removeChild(el) }, 850);
 }
+
+function dispCoords() {
+    const letters = 'ABCDEFGH'.split('')
+    let children1 = document.getElementById('svg1').children;
+    let children2 = document.getElementById('svg2').children;
+
+    for (i = 0; i < 8; i++) {
+        if (game.display === 'w') {
+            children1[i].innerHTML = 8 - i;
+            children2[i].innerHTML = letters[i];
+        } else if (game.display === 'b') {
+            children1[i].innerHTML = i + 1;
+            children2[i].innerHTML = letters[7 - i];
+        }
+    }
+}
+
+function rotateBoard() {
+    let txt
+    if (game.display === 'w') { game.display = 'b'; txt = 'black' }
+    else if (game.display === 'b') { game.display = 'w'; txt = 'white' }
+    dispCoords()
+    document.getElementById('rotdiv').children[1].innerHTML = '&nbsp;&nbsp; Orientation: ' + txt
+}
+
