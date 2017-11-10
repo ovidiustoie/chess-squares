@@ -74,7 +74,6 @@ function colorSquare(square, color) {
     let parent = document.getElementById('coloredSquares');
     let el = document.createElement('DIV');
     el.className = 'square';
-    el.id = 'lol'
     el.style.left = $('#board').offset().left + (coord.x - 1) * 75;
     el.style.top = $('#board').offset().top + (8 - coord.y) * 75;
     el.style.backgroundColor = color
