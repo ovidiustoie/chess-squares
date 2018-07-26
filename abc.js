@@ -1,7 +1,6 @@
 let game = {
-    score: 0,
     square: undefined,
-    xVals: 'abcdefgh'.split(''),
+    xVals: 'abcdefghh'.split(''),
     yVals: '12345678'.split(''),
     setSquare: function () {
         let res = this.xVals[Math.floor((Math.random() * this.xVals.length))] + this.yVals[Math.floor((Math.random() * this.yVals.length))];
@@ -15,6 +14,7 @@ let game = {
 function loading() {
     game.setSquare();
     dispCoords();
+    changeCHB()
 }
 
 function retSquare(coord) {
@@ -27,6 +27,11 @@ function retCoord(square) {
     const letters = 'abcdefgh'.split('')
     if (game.display === 'w') { return { x: letters.indexOf(square.split('')[0]) + 1, y: Number(square.split('')[1]) } }
     else if (game.display === 'b') { return { x: 8 - letters.indexOf(square.split('')[0]), y: 9 - Number(square.split('')[1]) } }
+}
+
+function changeCHB() {
+    if (document.getElementById('coordCHB').checked === true) { coordVisibility(true) }
+    else {coordVisibility(false)}
 }
 
 
@@ -53,7 +58,6 @@ function clicked(evt) {
 
 function right() {
     colorSquare(game.square, 'green');
-    game.score++;
     game.setSquare();
 }
 
@@ -64,9 +68,6 @@ function wrong(square) {
 }
 
 function disp() {
-    let txt = ' point';
-    if (game.score > 1) { txt = ' points' }
-    document.getElementById('score').innerHTML = game.score + txt;
     document.getElementById('dispSquare').innerHTML = game.square;
 }
 
@@ -79,11 +80,12 @@ function colorSquare(square, color) {
     el.style.top = $('#board').offset().top + (8 - coord.y) * 75;
     el.style.backgroundColor = color
     parent.appendChild(el)
-    setTimeout(function () { el.style.opacity = '0.85' }, 1);
+    setTimeout(function () { el.style.opacity = '0.75' }, 1);
     setTimeout(function () { el.style.opacity = 0 }, 400);
     setTimeout(function () { parent.removeChild(el) }, 850);
 }
 
+// displays coords
 function dispCoords() {
     const letters = 'ABCDEFGH'.split('')
     let children1 = document.getElementById('svg1').children;
@@ -100,11 +102,19 @@ function dispCoords() {
     }
 }
 
+// hide or unhide coords
+function coordVisibility(bool) {
+    if (bool === true) { document.getElementById('svg').style.visibility = "visible"; }
+    else if (bool === false) { document.getElementById('svg').style.visibility = "hidden"; }
+    else console.error('error ' + bool + ' is not a boolean value');
+}
+
+// changes board orientations
 function rotateBoard() {
     let txt
     if (game.display === 'w') { game.display = 'b'; txt = 'black' }
     else if (game.display === 'b') { game.display = 'w'; txt = 'white' }
     dispCoords()
-    document.getElementById('rotdiv').children[1].innerHTML = '&nbsp;&nbsp; Orientation: ' + txt
+    document.getElementById('rotdiv').children[4].innerHTML = '&nbsp;&nbsp; Orientation: ' + txt
 }
 
